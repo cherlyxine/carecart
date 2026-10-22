@@ -1,24 +1,27 @@
-
 import 'package:flutter/material.dart';
-import 'screens/welcome_screen.dart';
+import 'app/carecart_root.dart';
+import 'theme/app_colors.dart';
 
-void main() {
-  runApp(const CareCartApp());
-}
+void main() => runApp(const CareCartApp());
 
 class CareCartApp extends StatelessWidget {
   const CareCartApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'CareCart',
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFFFAF7F0),
-        useMaterial3: true,
+  Widget build(BuildContext context) => MaterialApp(
+    title: 'CareCart',
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      useMaterial3: true,
+      scaffoldBackgroundColor: cream,
+      colorScheme: ColorScheme.fromSeed(seedColor: forest, primary: forest, surface: cream),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: cream,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
       ),
-      home: const WelcomeScreen(),
-    );
-  }
+    ),
+    home: const CareCartRoot(),
+  );
 }
