@@ -2,14 +2,33 @@ part of '../app/carecart_root.dart';
 
 extension _ReadingScreen on _CareCartRootState {
   Widget _reading() => _scroll([
-    _heading('Blood pressure', 'Your reading', 'Your blood pressure measurement has been saved.'),
-    Container(padding: const EdgeInsets.all(24), decoration: BoxDecoration(color: forest, borderRadius: BorderRadius.circular(16)), child: Column(children: [
-      Text('$systolic / $diastolic', style: const TextStyle(fontFamily: 'Georgia', color: Colors.white, fontSize: 51)),
-      const SizedBox(height: 8), const Text('Top number           Bottom number', style: TextStyle(color: Colors.white)),
-      const Divider(color: Colors.white54, height: 35), const Text('✓ Your result has been saved.', style: TextStyle(color: Colors.white)),
-    ])), const SizedBox(height: 20), const Text('What does this mean?', style: TextStyle(fontFamily: 'Georgia', fontSize: 22)),
-    const Text('Your care team can see this reading if you share it with them. You do not need to do anything else right now.'),
-    const SizedBox(height: 20), _button('What happens next?', () => open('finished'), icon: Icons.arrow_forward),
-    const SizedBox(height: 8), _button('Done', () => open('finished'), outlined: true),
+    _heading('Blood pressure', 'Your saved reading',
+        measured ? 'Your own measurement is saved on this device.' :
+            'No measurement has been saved yet.'),
+    if (measured)
+      Container(
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: accessibility['Higher contrast'] == true ? Colors.black : forest,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(children: [
+          Text('$systolic / $diastolic', style: const TextStyle(
+              fontSize: 48, color: Colors.white)),
+          const SizedBox(height: 8),
+          const Text('Systolic / Diastolic',
+              style: TextStyle(color: Colors.white, fontSize: 17)),
+          const SizedBox(height: 14),
+          const Text('Saved on this device',
+              style: TextStyle(color: Colors.white)),
+        ]),
+      ),
+    const SizedBox(height: 18),
+    const Text('CareCart does not diagnose or automatically share readings with your care team.'),
+    const SizedBox(height: 24),
+    _button('Record another reading', _enterBloodPressure,
+        outlined: true, icon: Icons.edit_note),
+    const SizedBox(height: 10),
+    _button('Done', () => open('finished'), icon: Icons.check),
   ]);
 }

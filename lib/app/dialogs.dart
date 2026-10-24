@@ -84,47 +84,10 @@ extension _CareDialogs on _CareCartRootState {
   }
 
   Future<void> _addAppointment() async {
-    final draft = List<String>.filled(5, '');
-    final result = await showDialog<List<String>>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: const Text('New appointment'),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (int i = 0; i < 5; i++)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: TextFormField(
-                    onChanged: (value) => draft[i] = value,
-                    decoration: InputDecoration(
-                      labelText: [
-                        'Appointment name', 'Date (e.g. 15 May)',
-                        'Time', 'Place', 'Doctor or practitioner',
-                      ][i],
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('Cancel'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(dialogContext).pop(List.of(draft)),
-            child: const Text('Save appointment'),
-          ),
-        ],
-      ),
+    final appointment = await Navigator.of(context).push<Appointment>(
+      MaterialPageRoute(builder: (_) => const AddAppointmentScreen()),
     );
-    if (!mounted || result == null || result[0].trim().isEmpty) return;
-    _update(() => appointments.insert(
-      0,
-      Appointment(result[0].trim(), result[1], result[2], result[3], result[4]),
-    ));
+    if (!mounted || appointment == null) return;
+    _update(() => appointments.insert(0, appointment));
   }
 }
