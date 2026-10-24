@@ -1,8 +1,9 @@
-
 import 'package:flutter/material.dart';
+import 'dart:io';
 import '../models/care_models.dart';
 import '../theme/app_colors.dart';
 import '../screens/welcome_screen.dart';
+import '../screens/add_medicine_screen.dart';
 
 part '../widgets/common_widgets.dart';
 part '../screens/today_screen.dart';
@@ -18,7 +19,6 @@ part '../screens/help_screen.dart';
 part '../screens/profile_screen.dart';
 part '../screens/accessibility_screen.dart';
 part 'dialogs.dart';
-
 
 class CareCartRoot extends StatefulWidget {
   const CareCartRoot({super.key});

@@ -1,7 +1,8 @@
 class Medicine {
-  Medicine(this.name, this.dose, this.time, this.instructions, {this.taken = false});
+  Medicine(this.name, this.dose, this.time, this.instructions, {this.taken = false, this.photoPath});
   String name, dose, time, instructions;
   bool taken;
+  final String? photoPath;
 }
 
 class Appointment {
